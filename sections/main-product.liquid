@@ -1,0 +1,46 @@
+{%- liquid
+  assign variante = product.selected_or_first_available_variant
+-%}
+<section class="pdp">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when "gallery" %}
+        <div class="pdp__gallery">
+          {% for img in product.images %}
+            <img src="{{ img | image_url: width: 800 }}" alt="{{ product.title }}" loading="lazy" width="800" height="800">
+          {% endfor %}
+        </div>
+      {% when "buy" %}
+        <div class="pdp__buy">
+          <h1>{{ product.title }}</h1>
+          <p class="pdp__price">{{ variante.price | money }}</p>
+          <form action="{{ routes.cart_add_url }}" method="post">
+            <input type="hidden" name="id" value="{{ variante.id }}">
+            <button type="submit" {{ block.shopify_attributes }}>Add to cart</button>
+          </form>
+        </div>
+      {% when "size_guide" %}
+        {%- assign guia = product.metafields.custom.size_guide.value -%}
+        {% if guia %}
+          <details {{ block.shopify_attributes }}>
+            <summary>{{ guia.title }}</summary>
+            <div>{{ guia.body }}</div>
+          </details>
+        {% endif %}
+    {% endcase %}
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "blocks": [
+    { "type": "gallery", "name": "Gallery", "limit": 1 },
+    { "type": "buy", "name": "Buy box", "limit": 1 },
+    { "type": "size_guide", "name": "Size guide", "limit": 1 }
+  ],
+  "settings": [
+    { "type": "range", "id": "padding", "min": 0, "max": 48, "step": 4, "default": 16, "label": "Padding" }
+  ]
+}
+{% endschema %}
