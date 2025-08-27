@@ -1,0 +1,1 @@
+{ "sections": { "main": { "type": "main-product", "blocks": { "g": { "type": "gallery" }, "b": { "type": "buy" }, "s": { "type": "size_guide" } }, "block_order": ["g", "b", "s"] } }, "order": ["main"] }
