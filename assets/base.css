@@ -4,3 +4,5 @@ body { margin: 0; font-family: system-ui; color: var(--color); }
 .pdp__gallery img { width: 100%; height: auto; }
 .btn:focus-visible, [data-cart-trigger]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* rationale: grid here, the component owns its own gap */
+
+/* rationale: grid here, the component owns its own gap */
