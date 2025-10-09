@@ -9,3 +9,4 @@ if (trigger && drawer) {
     if (!aberto) drawer.querySelector("a, button")?.focus();
   });
 }
+// rationale: guard before the call, the caller owns the retry
